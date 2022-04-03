@@ -1,5 +1,19 @@
 #include <iostream>
 
+
+#include "../include/fdModule.h"
+#include "../include/fdSum.h"
+#include "../include/fdRandom.h"
+#include "../include/feLineal.h"
+#include "../include/feQuadratic.h"
+#include "../include/feDispersion.h"
+#include "../include/feRedispersion.h"
+#include "../include/HashTable.h"
+#include "../include/Block.h"
+#include "../include/Sequence.h"
+
+typedef long testType;
+
 int main() {
     int tableSize, fd, td;
     std::cout << "Introduce el tamano de la tabla:" << std::endl;
@@ -9,15 +23,19 @@ int main() {
                  "  2.- Basada en la Suma \n"
                  "  3.- Pseudoaleatoria " << std::endl;
     std::cin >> fd;
+    DispersionFunction<testType> *dispersionFunction;
     switch (fd) {
         case 1:
-            std::cout << "Modulo con abierta" << std::endl;
+            std::cout << "Modulo" << std::endl;
+            dispersionFunction = new fdModule<testType>(tableSize);
             break;
         case 2:
-            std::cout << "Basada en la suma con abierta" << std::endl;
+            std::cout << "Basada en la suma" << std::endl;
+            dispersionFunction = new fdSum<testType>(tableSize);
             break;
         case 3:
-            std::cout << "Pseudoaleatoria con abierta" << std::endl;
+            std::cout << "Pseudoaleatoria" << std::endl;
+            dispersionFunction = new fdRandom<testType>(tableSize);
             break;
         default:
             std::cout << "Opcion invalida" << std::endl;

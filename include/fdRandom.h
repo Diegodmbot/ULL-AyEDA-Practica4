@@ -10,13 +10,12 @@
 
 template<class Key>
 class fdRandom : public DispersionFunction<Key> {
-    explicit fdRandom(const unsigned n) : tableSize(n) {}
-
+public:
     unsigned operator()(const Key &k) const {
         srand(k);
         return rand() % tableSize;
     }
-
+    explicit fdRandom(const unsigned n) : tableSize(n) {}
 private:
     unsigned tableSize;
 };
