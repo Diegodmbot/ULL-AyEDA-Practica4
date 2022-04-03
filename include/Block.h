@@ -9,7 +9,11 @@
 template<class Key>
 class Block : public Sequence<Key> {
 public:
-
+    Block();
+    ~Block();
+    bool insert(Key &x);
+    bool search(Key &x);
+    bool isFUll();
 private:
     int blockSize;
 };

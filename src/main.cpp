@@ -10,7 +10,7 @@
 #include "../include/feRedispersion.h"
 #include "../include/HashTable.h"
 #include "../include/Block.h"
-#include "../include/Sequence.h"
+#include "../include/List.h"
 
 typedef long testType;
 
@@ -45,12 +45,15 @@ int main() {
                  "  1.- Abierta \n"
                  "  2.- Cerrada" << std::endl;
     std::cin >> td;
+    Sequence<testType> *sequence;
     switch (td) {
         case 1:
             std::cout << "Modulo con abierta" << std::endl;
+            sequence = new List<testType>();
             break;
         case 2:
             std::cout << "Modulo con cerrada" << std::endl;
+            sequence = new Block<testType>();
             int blockSize, fe;
             std::cout << "Introduce el tamano del bloque:" << std::endl;
             std::cin >> blockSize;
@@ -60,6 +63,28 @@ int main() {
                          "  3.- Doble dispersion \n"
                          "  4.- Redispersion " << std::endl;
             std::cin >> fe;
+            ExplorationFunction<testType> *explorationFunction;
+            switch (fe) {
+                case 1:
+                    std::cout << "Lineal" << std::endl;
+                    explorationFunction = new feLineal<testType>();
+                    break;
+                case 2:
+                    std::cout << "Cuadratica" << std::endl;
+                    explorationFunction = new feQuadratic<testType>();
+                    break;
+                case 3:
+                    std::cout << "Doble dispersion" << std::endl;
+                    explorationFunction = new feDispersion<testType>();
+                    break;
+                case 4:
+                    std::cout << "Redispersion" << std::endl;
+                    explorationFunction = new feRedispersion<testType>();
+                    break;
+                default:
+                    std::cout << "Opcion invalida" << std::endl;
+                    return 1;
+            }
             break;
         default:
             std::cout << "Opcion invalida" << std::endl;
@@ -67,3 +92,4 @@ int main() {
     }
     return 0;
 }
+// TODO: implementar el menu

@@ -12,6 +12,7 @@
 template<class Key>
 class feDispersion : public ExplorationFunction<Key> {
 public:
+    feDispersion()
     unsigned operator()(const Key& k, unsigned i) const {
         return ;
     }

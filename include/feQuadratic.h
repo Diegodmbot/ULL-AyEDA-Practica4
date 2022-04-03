@@ -17,5 +17,4 @@ public:
 
 #endif //P04DIEGODIAZMORON_FEQUADRATIC_H
 
-//TODO: preguntar cómo es "En la implementación de la función de exploración cuadrática sólo se tendrán en cuenta los
-//desplazamientos positivos respecto a la posición inicial."
+//"En la implementación de la función de exploración cuadrática sólo se tendrán en cuenta los desplazamientos positivos respecto a la posición inicial."

@@ -25,4 +25,4 @@ private:
 };
 #endif //P04DIEGODIAZMORON_HASHTABLE_H
 
-//TODO: implementar la tabla hash punto 6
+//TODO: implementar la tabla hash
