@@ -12,17 +12,40 @@
 template<class Key>
 class List : Sequence<Key> {
 public:
-    List();
-    ~List();
+    List() = default;
+    ~List() = default;
     bool insert(Key &x);
     bool search(Key &x);
     bool isFUll();
-
 private:
-    int size;
     std::list<Key> list_;
 };
 
-#endif //P04DIEGODIAZMORON_LIST_H
+template<class Key>
+bool List<Key>::insert(Key &x) {
+    bool output = false;
+    if (!search(x)) {
+        output = true;
+        list_.push_back(x);
+    }
+    return output;
+}
 
-//TODO: implementar punto 4
+template<class Key>
+bool List<Key>::search(Key &x) {
+    bool output = false;
+    for (auto &i: list_) {
+        if (i == x) {
+            output = true;
+            break;
+        }
+    }
+    return output;
+}
+
+template<class Key>
+bool List<Key>::isFUll() {
+    return false;
+}
+
+#endif //P04DIEGODIAZMORON_LIST_H

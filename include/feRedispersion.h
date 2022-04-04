@@ -16,9 +16,7 @@ public:
 template<class Key>
 unsigned feRedispersion<Key>::operator()(const Key& k, unsigned i) const {
     srand(k);
-    for(int j = 0; j < i; j++) {
-        rand();
-    }
+    for(int j = 1; j < i; j++) rand();
     return rand();
 }
 
