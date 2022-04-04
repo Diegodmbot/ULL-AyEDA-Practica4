@@ -10,10 +10,16 @@
 template<class Key>
 class feRedispersion : public ExplorationFunction<Key> {
 public:
-    unsigned operator()(const Key& k, unsigned i) const {
-        return ;
-    }
+    unsigned operator()(const Key& k, unsigned i) const;
 };
 
-//TODO: implementar la funcion de exploracion de redispersion punto 2
+template<class Key>
+unsigned feRedispersion<Key>::operator()(const Key& k, unsigned i) const {
+    srand(k);
+    for(int j = 0; j < i; j++) {
+        rand();
+    }
+    return rand();
+}
+
 #endif //P04DIEGODIAZMORON_FEREDISPERSION_H

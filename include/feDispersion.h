@@ -6,18 +6,21 @@
 #define P04DIEGODIAZMORON_FEDISPERSION_H
 
 
-
 #include "ExplorationFunction.h"
 
 template<class Key>
 class feDispersion : public ExplorationFunction<Key> {
 public:
-    feDispersion()
-    unsigned operator()(const Key& k, unsigned i) const {
-        return ;
-    }
+    explicit feDispersion(DispersionFunction<Key> *function) : fd_(function) {}
+    unsigned operator()(const Key &k, unsigned i) const;
+private:
+    DispersionFunction<Key> *fd_;
 };
 
-#endif //P04DIEGODIAZMORON_FEDISPERSION_H
+template<class Key>
+unsigned feDispersion<Key>::operator()(const Key &k, unsigned i) const {
+    unsigned a1 = fd_(k, i);
+    return i * a1;
+}
 
-//TODO: implementar la funcion de exploracion de dispersion punto 2
+#endif //P04DIEGODIAZMORON_FEDISPERSION_H

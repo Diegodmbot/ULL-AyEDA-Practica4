@@ -10,10 +10,13 @@
 template<class Key>
 class feQuadratic : public ExplorationFunction<Key> {
 public:
-    unsigned operator()(const Key& k, unsigned i) const {
-        return i * i;
-    }
+    unsigned operator()(const Key& k, unsigned i) const;
 };
+
+template<class Key>
+unsigned feQuadratic<Key>::operator()(const Key& k, unsigned i) const {
+    return i * i;
+}
 
 #endif //P04DIEGODIAZMORON_FEQUADRATIC_H
 

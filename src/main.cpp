@@ -1,6 +1,4 @@
 #include <iostream>
-
-
 #include "../include/fdModule.h"
 #include "../include/fdSum.h"
 #include "../include/fdRandom.h"
@@ -14,6 +12,9 @@
 
 typedef long testType;
 
+int initializeTable(int &tableSize);
+
+
 int main() {
     int tableSize, fd, td;
     std::cout << "Introduce el tamano de la tabla:" << std::endl;
@@ -26,21 +27,19 @@ int main() {
     DispersionFunction<testType> *dispersionFunction;
     switch (fd) {
         case 1:
-            std::cout << "Modulo" << std::endl;
             dispersionFunction = new fdModule<testType>(tableSize);
             break;
         case 2:
-            std::cout << "Basada en la suma" << std::endl;
             dispersionFunction = new fdSum<testType>(tableSize);
             break;
         case 3:
-            std::cout << "Pseudoaleatoria" << std::endl;
             dispersionFunction = new fdRandom<testType>(tableSize);
             break;
         default:
             std::cout << "Opcion invalida" << std::endl;
             return 1;
     };
+    return 0;
     std::cout << "Seleccione una tecnica de dispersion: \n"
                  "  1.- Abierta \n"
                  "  2.- Cerrada" << std::endl;
@@ -48,11 +47,9 @@ int main() {
     Sequence<testType> *sequence;
     switch (td) {
         case 1:
-            std::cout << "Modulo con abierta" << std::endl;
             sequence = new List<testType>();
             break;
         case 2:
-            std::cout << "Modulo con cerrada" << std::endl;
             sequence = new Block<testType>();
             int blockSize, fe;
             std::cout << "Introduce el tamano del bloque:" << std::endl;
@@ -66,19 +63,15 @@ int main() {
             ExplorationFunction<testType> *explorationFunction;
             switch (fe) {
                 case 1:
-                    std::cout << "Lineal" << std::endl;
                     explorationFunction = new feLineal<testType>();
                     break;
                 case 2:
-                    std::cout << "Cuadratica" << std::endl;
                     explorationFunction = new feQuadratic<testType>();
                     break;
                 case 3:
-                    std::cout << "Doble dispersion" << std::endl;
                     explorationFunction = new feDispersion<testType>();
                     break;
                 case 4:
-                    std::cout << "Redispersion" << std::endl;
                     explorationFunction = new feRedispersion<testType>();
                     break;
                 default:
@@ -89,7 +82,8 @@ int main() {
         default:
             std::cout << "Opcion invalida" << std::endl;
             return 1;
-    }
+    };
     return 0;
 }
+
 // TODO: implementar el menu
