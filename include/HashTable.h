@@ -32,9 +32,9 @@ HashTable<Key>::HashTable(int tableSz, DispersionFunction<Key> *dispersionFuncti
     blockSize = blockSz;
     fe = explorationFunction;
     fd = dispersionFunction;
-    if(fe == nullptr) table = new List<Key>[tableSize];
+    if(fe == nullptr) table = new List<Key> [tableSize];
     else{
-        table = new Block<Key>[tableSize];
+        table = new Block<Key> [tableSize];
         for(int i = 0; i < tableSize; i++){
             table[i] = Block<Key>(blockSize);
         }
@@ -43,12 +43,12 @@ HashTable<Key>::HashTable(int tableSz, DispersionFunction<Key> *dispersionFuncti
 
 template<class Key>
 void HashTable<Key>::insert(Key key) {
-    unsigned index = fd(key, tableSize);
-    if (!table->insert(key, index)) {
+    unsigned index = (*fd)(key);
+    if (!table->insert(key)) {
         int attempt = 0;
-        while (attempt < blockSize && !table->insert(key, index)) {
-            index = fe(key, index);
-            table->insert(key, index);
+        while (attempt < blockSize && !table->insert(key)) {
+            index = (*fe)(key, index);
+            table->insert(key);
             attempt++;
         }
     }
@@ -58,12 +58,12 @@ void HashTable<Key>::insert(Key key) {
 template<class Key>
 bool HashTable<Key>::search(Key key) {
     bool output = false;
-    unsigned index = fd(key, tableSize);
-    if(table->search(key, index)) output = true;
+    unsigned index = (*fd)(key);
+    if(table->search(key)) output = true;
     else {
         int attempt = 0;
-        while (attempt < blockSize && !table->search(key, index)) {
-            index = fe(key, index);
+        while (attempt < blockSize && !table->search(key)) {
+            index = (*fe)(key, index);
             if(table->search(key)) output = true;
             attempt++;
         }
@@ -71,7 +71,6 @@ bool HashTable<Key>::search(Key key) {
     return output;
 
 }
-
 
 #endif //P04DIEGODIAZMORON_HASHTABLE_H
 

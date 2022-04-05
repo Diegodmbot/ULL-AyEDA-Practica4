@@ -80,6 +80,7 @@ int main() {
             std::cout << "Opcion invalida" << std::endl;
             return 1;
     };
+    // Menú
     while(true){
         std::cout << "Seleccione una opcion: \n"
                      "  1.- Insertar \n"

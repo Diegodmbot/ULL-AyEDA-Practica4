@@ -7,6 +7,7 @@
 
 
 #include "ExplorationFunction.h"
+#include "DispersionFunction.h"
 
 template<class Key>
 class feDispersion : public ExplorationFunction<Key> {
@@ -19,7 +20,7 @@ private:
 
 template<class Key>
 unsigned feDispersion<Key>::operator()(const Key &k, unsigned i) const {
-    unsigned a1 = fd_(k, i);
+    unsigned a1 = (*fd_)(k);
     return i * a1;
 }
 
