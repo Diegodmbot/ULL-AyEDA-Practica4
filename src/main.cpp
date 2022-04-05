@@ -39,17 +39,14 @@ int main() {
                  "  1.- Abierta \n"
                  "  2.- Cerrada" << std::endl;
     std::cin >> td;
-    Sequence<testType> *sequence;
     HashTable<testType> *hashTable;
     switch (td) {
         case 1:
-            sequence = new List<testType>();
             hashTable = new HashTable<testType>(tableSize, dispersionFunction);
             break;
         case 2:
             std::cout << "Introduce el tamano del bloque:" << std::endl;
             std::cin >> blockSize;
-            sequence = new Block<testType>(blockSize);
             std::cout << "Seleccione una funcion de exploracion: \n"
                          "  1.- Lineal \n"
                          "  2.- Cuadratica \n"
