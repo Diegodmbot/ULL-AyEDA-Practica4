@@ -33,7 +33,12 @@ HashTable<Key>::HashTable(int tableSz, DispersionFunction<Key> *dispersionFuncti
     fe = explorationFunction;
     fd = dispersionFunction;
     if(fe == nullptr) table = new List<Key>[tableSize];
-    else table = new Block<Key>[tableSize];
+    else{
+        table = new Block<Key>[tableSize];
+        for(int i = 0; i < tableSize; i++){
+            table[i] = new Block<Key>(blockSize);
+        }
+    }
 }
 
 template<class Key>

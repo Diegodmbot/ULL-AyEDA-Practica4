@@ -5,6 +5,8 @@
 #ifndef P04DIEGODIAZMORON_EXPLORATIONFUNCTION_H
 #define P04DIEGODIAZMORON_EXPLORATIONFUNCTION_H
 
+#include "DispersionFunction.h"
+
 template<class Key>
 class ExplorationFunction {
 public:

@@ -11,7 +11,7 @@
 template<class Key>
 class feDispersion : public ExplorationFunction<Key> {
 public:
-    explicit feDispersion(DispersionFunction<Key> *function) : fd_(function) {}
+    feDispersion(DispersionFunction<Key> *function) : fd_(function) {}
     unsigned operator()(const Key &k, unsigned i) const;
 private:
     DispersionFunction<Key> *fd_;

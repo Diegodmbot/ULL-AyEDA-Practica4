@@ -11,6 +11,7 @@
 template<class Key>
 class Block : public Sequence<Key> {
 public:
+    Block();
     Block(int sz);
     ~Block();
     bool insert(const Key &x);
@@ -21,6 +22,10 @@ private:
     int numElements;
     std::vector<Key> block_;
 };
+
+template<class Key>
+Block<Key>::Block() : blockSize(0), numElements(0), block_(NULL) {}
+
 
 template<class Key>
 Block<Key>::Block(int sz) : blockSize(sz), numElements(0) {

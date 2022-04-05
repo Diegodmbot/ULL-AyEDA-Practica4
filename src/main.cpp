@@ -7,14 +7,9 @@
 #include "../include/feDispersion.h"
 #include "../include/feRedispersion.h"
 #include "../include/HashTable.h"
-#include "../include/Sequence.h"
-#include "../include/Block.h"
-#include "../include/List.h"
+
 
 typedef long testType;
-
-int initializeTable(int &tableSize);
-
 
 int main() {
     int tableSize, fd, td, blockSize, fe;;
@@ -85,8 +80,33 @@ int main() {
             std::cout << "Opcion invalida" << std::endl;
             return 1;
     };
-    // TODO: implementar el menu
-
+    while(true){
+        std::cout << "Seleccione una opcion: \n"
+                     "  1.- Insertar \n"
+                     "  2.- Buscar \n"
+                     "  3.- Salir" << std::endl;
+        int option;
+        std::cin >> option;
+        switch (option) {
+            case 1:
+                std::cout << "Introduce el elemento a insertar:" << std::endl;
+                testType element;
+                std::cin >> element;
+                hashTable->insert(element);
+                break;
+            case 2:
+                std::cout << "Introduce el elemento a buscar:" << std::endl;
+                testType element3;
+                std::cin >> element3;
+                std::cout << "El elemento se encuentra en la posicion: " << hashTable->search(element3) << std::endl;
+                break;
+            case 3:
+                return 0;
+            default:
+                std::cout << "Opcion invalida" << std::endl;
+                break;
+        }
+    }
     return 0;
 }
 
