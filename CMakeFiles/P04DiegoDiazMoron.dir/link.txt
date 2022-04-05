@@ -1,0 +1,1 @@
+/usr/bin/c++    -rdynamic CMakeFiles/P04DiegoDiazMoron.dir/src/main.o  -o P04DiegoDiazMoron 

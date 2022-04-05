@@ -1,0 +1,3 @@
+/mnt/c/Users/diedi/OneDrive/Escritorio/UNIVERSIDAD/2º/2ºCuatrimestre/AyEDA/P04DiegoDiazMoron/CMakeFiles/rebuild_cache.dir
+/mnt/c/Users/diedi/OneDrive/Escritorio/UNIVERSIDAD/2º/2ºCuatrimestre/AyEDA/P04DiegoDiazMoron/CMakeFiles/P04DiegoDiazMoron.dir
+/mnt/c/Users/diedi/OneDrive/Escritorio/UNIVERSIDAD/2º/2ºCuatrimestre/AyEDA/P04DiegoDiazMoron/CMakeFiles/edit_cache.dir
