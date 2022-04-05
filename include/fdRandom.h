@@ -19,7 +19,7 @@ private:
 
 template<class Key>
 unsigned fdRandom<Key>::operator()(const Key &k) const {
-    srand(k);
+    srand(k.getEntireKey());
     return rand() % tableSize;
 }
 

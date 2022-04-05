@@ -14,8 +14,9 @@ public:
 };
 
 template<class Key>
-unsigned ExplorationFunction<Key>::operator()(const Key& k, unsigned i) const {
+unsigned feLineal<Key>::operator()(const Key &k, unsigned int i) const {
     return i;
 }
+
 
 #endif //P04DIEGODIAZMORON_FELINEAL_H

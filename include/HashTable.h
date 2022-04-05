@@ -44,11 +44,11 @@ HashTable<Key>::HashTable(int tableSz, DispersionFunction<Key> *dispersionFuncti
 template<class Key>
 void HashTable<Key>::insert(Key key) {
     unsigned index = (*fd)(key);
-    if (!table->insert(key)) {
+    if (!table[index].insert(key)) {
         int attempt = 0;
-        while (attempt < blockSize && !table->insert(key)) {
+        while (attempt < blockSize && !table[index].insert(key)) {
             index = (*fe)(key, index);
-            table->insert(key);
+            table[index].insert(key);
             attempt++;
         }
     }
@@ -59,12 +59,12 @@ template<class Key>
 bool HashTable<Key>::search(Key key) {
     bool output = false;
     unsigned index = (*fd)(key);
-    if(table->search(key)) output = true;
+    if(table[index].search(key)) output = true;
     else {
         int attempt = 0;
-        while (attempt < blockSize && !table->search(key)) {
+        while (attempt < blockSize && !table[index].search(key)) {
             index = (*fe)(key, index);
-            if(table->search(key)) output = true;
+            if(table[index].search(key)) output = true;
             attempt++;
         }
     }

@@ -18,8 +18,8 @@ private:
 
 template<class Key>
 unsigned fdSum<Key>::operator()(const Key &k) const {
-    int d = 0;
-    Key aux = k;
+    long d = 0;
+    long aux = k.getEntireKey();
     while (aux > 0) {
         d += aux % 10;
         aux /= 10;
