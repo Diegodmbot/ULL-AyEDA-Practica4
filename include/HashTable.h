@@ -7,6 +7,7 @@
 
 #include "DispersionFunction.h"
 #include "ExplorationFunction.h"
+#include "Sequence.h"
 
 template<class Key>
 class HashTable {
@@ -17,16 +18,17 @@ public:
     bool search(Key key);
 private:
     int tableSize;
-    // array of pointers to keys
-    Key **table;
+    int blockSize;
+    Sequence<Key> *table;
     DispersionFunction<Key> *fd;
     ExplorationFunction<Key> *fe;
 };
 
 template<class Key>
-HashTable<Key>::HashTable(int size, DispersionFunction<Key> *dispersionFunction, ExplorationFunction<Key> *explorationFunction, int blockSize) {
-    tableSize = size;
-    table = new Key*[tableSize];
+HashTable<Key>::HashTable(int tableSz, DispersionFunction<Key> *dispersionFunction, ExplorationFunction<Key> *explorationFunction, int blockSz) {
+    tableSize = tableSz;
+    blockSize = blockSz;
+    table = new Sequence<Key>[tableSize];
     for (int i = 0; i < tableSize; i++) {
         table[i] = nullptr;
     }
@@ -34,7 +36,35 @@ HashTable<Key>::HashTable(int size, DispersionFunction<Key> *dispersionFunction,
     fe = explorationFunction;
 }
 
+template<class Key>
+void HashTable<Key>::insert(Key key) {
+    unsigned index = fd(key, tableSize);
+    if (table[index] == nullptr) {
+        table->insert(key, index);
+    } else {
+        int attempt = 0;
+        while (attempt <= blockSize) {
+            index = fe(key, index);
+            if (table[index] == nullptr) {
+                table->insert(key, index);
+                break;
+            }
+            attempt++;
+        }
+    }
+}
+
+
+template<class Key>
+bool HashTable<Key>::search(Key key) {
+    bool output = true;
+    unsigned index = fd(key, tableSize);
+    if (table[index] == nullptr)
+        return false;
+    return output;
+
+}
+
 
 #endif //P04DIEGODIAZMORON_HASHTABLE_H
 
-//TODO: implementar la tabla hash

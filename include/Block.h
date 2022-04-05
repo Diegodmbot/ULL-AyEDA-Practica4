@@ -13,9 +13,9 @@ class Block : public Sequence<Key> {
 public:
     Block(int sz);
     ~Block();
-    bool insert(Key &x);
-    bool search(Key &x);
-    bool isFUll();
+    bool insert(const Key &x);
+    bool search(const Key &x);
+    bool isFull() const;
 private:
     int blockSize;
     std::vector<Key> block_;
@@ -32,9 +32,9 @@ Block<Key>::~Block() {
 }
 
 template<class Key>
-bool Block<Key>::insert(Key &x) {
+bool Block<Key>::insert(const Key &x) {
     bool output = true;
-    if (isFUll())
+    if (isFull())
         output = false;
     else
         block_.push_back(x);
@@ -42,7 +42,7 @@ bool Block<Key>::insert(Key &x) {
 }
 
 template<class Key>
-bool Block<Key>::search(Key &x) {
+bool Block<Key>::search(const Key &x) {
     bool output = false;
     for (auto &i: block_) {
         if (i == x) {
@@ -54,7 +54,7 @@ bool Block<Key>::search(Key &x) {
 }
 
 template<class Key>
-bool Block<Key>::isFUll() {
+bool Block<Key>::isFull() const {
     bool output = false;
     if (block_.size() == blockSize) {
         output = true;
@@ -64,5 +64,3 @@ bool Block<Key>::isFUll() {
 
 
 #endif //P04DIEGODIAZMORON_BLOCK_H
-
-// TODO: implmentar clase block putno 5

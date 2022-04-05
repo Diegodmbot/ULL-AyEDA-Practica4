@@ -7,6 +7,7 @@
 #include "../include/feDispersion.h"
 #include "../include/feRedispersion.h"
 #include "../include/HashTable.h"
+#include "../include/Sequence.h"
 #include "../include/Block.h"
 #include "../include/List.h"
 
@@ -16,7 +17,7 @@ int initializeTable(int &tableSize);
 
 
 int main() {
-    int tableSize, fd, td;
+    int tableSize, fd, td, blockSize, fe;;
     std::cout << "Introduce el tamano de la tabla:" << std::endl;
     std::cin >> tableSize;
     std::cout << "Seleccione una funcion de dispersion: \n"
@@ -39,21 +40,21 @@ int main() {
             std::cout << "Opcion invalida" << std::endl;
             return 1;
     };
-    return 0;
     std::cout << "Seleccione una tecnica de dispersion: \n"
                  "  1.- Abierta \n"
                  "  2.- Cerrada" << std::endl;
     std::cin >> td;
     Sequence<testType> *sequence;
+    HashTable<testType> *hashTable;
     switch (td) {
         case 1:
             sequence = new List<testType>();
+            hashTable = new HashTable<testType>(tableSize, dispersionFunction);
             break;
         case 2:
-            sequence = new Block<testType>();
-            int blockSize, fe;
             std::cout << "Introduce el tamano del bloque:" << std::endl;
             std::cin >> blockSize;
+            sequence = new Block<testType>(blockSize);
             std::cout << "Seleccione una funcion de exploracion: \n"
                          "  1.- Lineal \n"
                          "  2.- Cuadratica \n"
@@ -69,7 +70,7 @@ int main() {
                     explorationFunction = new feQuadratic<testType>();
                     break;
                 case 3:
-                    explorationFunction = new feDispersion<testType>();
+                    explorationFunction = new feDispersion<testType>(dispersionFunction);
                     break;
                 case 4:
                     explorationFunction = new feRedispersion<testType>();
@@ -78,6 +79,7 @@ int main() {
                     std::cout << "Opcion invalida" << std::endl;
                     return 1;
             }
+            hashTable = new HashTable<testType>(tableSize, dispersionFunction, explorationFunction, blockSize);
             break;
         default:
             std::cout << "Opcion invalida" << std::endl;

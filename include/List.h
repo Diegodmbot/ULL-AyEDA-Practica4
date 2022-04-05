@@ -10,19 +10,19 @@
 #include "Sequence.h"
 
 template<class Key>
-class List : Sequence<Key> {
+class List : public Sequence<Key> {
 public:
     List() = default;
     ~List() = default;
-    bool insert(Key &x);
-    bool search(Key &x);
-    bool isFUll();
+    bool insert(const Key &x);
+    bool search(const Key &x);
+    bool isFull() const;
 private:
     std::list<Key> list_;
 };
 
 template<class Key>
-bool List<Key>::insert(Key &x) {
+bool List<Key>::insert(const Key &x){
     bool output = false;
     if (!search(x)) {
         output = true;
@@ -32,7 +32,7 @@ bool List<Key>::insert(Key &x) {
 }
 
 template<class Key>
-bool List<Key>::search(Key &x) {
+bool List<Key>::search(const Key &x) {
     bool output = false;
     for (auto &i: list_) {
         if (i == x) {
@@ -44,8 +44,10 @@ bool List<Key>::search(Key &x) {
 }
 
 template<class Key>
-bool List<Key>::isFUll() {
+bool List<Key>::isFull() const {
     return false;
 }
+
+
 
 #endif //P04DIEGODIAZMORON_LIST_H
