@@ -19,7 +19,7 @@ private:
 template<class Key>
 unsigned fdSum<Key>::operator()(const Key &k) const {
     long d = 0;
-    long aux = k.getEntireKey();
+    long aux = k;
     while (aux > 0) {
         d += aux % 10;
         aux /= 10;

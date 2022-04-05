@@ -18,7 +18,7 @@ private:
 
 template<class Key>
 unsigned fdModule<Key>::operator()(const Key& k) const {
-    return k.getEntireKey() % tableSize;
+    return k % tableSize;
 }
 
 #endif //P04DIEGODIAZMORON_FDMODULE_H
