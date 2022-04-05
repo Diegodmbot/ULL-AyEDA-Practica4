@@ -24,7 +24,7 @@ private:
 };
 
 template<class Key>
-Block<Key>::Block() : blockSize(0), numElements(0), block_(NULL) {}
+Block<Key>::Block() : blockSize(0), numElements(0){}
 
 
 template<class Key>
@@ -33,9 +33,7 @@ Block<Key>::Block(int sz) : blockSize(sz), numElements(0) {
 }
 
 template<class Key>
-Block<Key>::~Block() {
-    delete[] block_;
-}
+Block<Key>::~Block() {}
 
 template<class Key>
 bool Block<Key>::insert(const Key &x) {

@@ -19,9 +19,10 @@ private:
 template<class Key>
 unsigned fdSum<Key>::operator()(const Key &k) const {
     int d = 0;
-    while (k > 0) {
-        d += k % 10;
-        k /= 10;
+    Key aux = k;
+    while (aux > 0) {
+        d += aux % 10;
+        aux /= 10;
     }
     return (d % tableSize);
 }

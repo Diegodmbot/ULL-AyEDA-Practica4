@@ -36,7 +36,7 @@ HashTable<Key>::HashTable(int tableSz, DispersionFunction<Key> *dispersionFuncti
     else{
         table = new Block<Key>[tableSize];
         for(int i = 0; i < tableSize; i++){
-            table[i] = new Block<Key>(blockSize);
+            table[i] = Block<Key>(blockSize);
         }
     }
 }
@@ -64,7 +64,7 @@ bool HashTable<Key>::search(Key key) {
         int attempt = 0;
         while (attempt < blockSize && !table->search(key, index)) {
             index = fe(key, index);
-            if(table->search(key, index)) output = true;
+            if(table->search(key)) output = true;
             attempt++;
         }
     }
