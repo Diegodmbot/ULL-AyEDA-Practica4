@@ -18,11 +18,12 @@ public:
     bool isFull() const;
 private:
     int blockSize;
+    int numElements;
     std::vector<Key> block_;
 };
 
 template<class Key>
-Block<Key>::Block(int sz) : blockSize(sz) {
+Block<Key>::Block(int sz) : blockSize(sz), numElements(0) {
     block_.resize(sz);
 }
 
@@ -34,10 +35,12 @@ Block<Key>::~Block() {
 template<class Key>
 bool Block<Key>::insert(const Key &x) {
     bool output = true;
-    if (isFull())
+    if (!isFull() && !search(x)){
+        block_[numElements] = x;
+        numElements++;
+    } else {
         output = false;
-    else
-        block_.push_back(x);
+    }
     return output;
 }
 
@@ -56,7 +59,7 @@ bool Block<Key>::search(const Key &x) {
 template<class Key>
 bool Block<Key>::isFull() const {
     bool output = false;
-    if (block_.size() == blockSize) {
+    if (numElements == blockSize) {
         output = true;
     }
     return output;

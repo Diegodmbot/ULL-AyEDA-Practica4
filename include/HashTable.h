@@ -8,6 +8,8 @@
 #include "DispersionFunction.h"
 #include "ExplorationFunction.h"
 #include "Sequence.h"
+#include "List.h"
+#include "Block.h"
 
 template<class Key>
 class HashTable {
@@ -28,27 +30,20 @@ template<class Key>
 HashTable<Key>::HashTable(int tableSz, DispersionFunction<Key> *dispersionFunction, ExplorationFunction<Key> *explorationFunction, int blockSz) {
     tableSize = tableSz;
     blockSize = blockSz;
-    table = new Sequence<Key>[tableSize];
-    for (int i = 0; i < tableSize; i++) {
-        table[i] = nullptr;
-    }
-    fd = dispersionFunction;
     fe = explorationFunction;
+    fd = dispersionFunction;
+    if(fe == nullptr) table = new List<Key>[tableSize];
+    else table = new Block<Key>[tableSize];
 }
 
 template<class Key>
 void HashTable<Key>::insert(Key key) {
     unsigned index = fd(key, tableSize);
-    if (table[index] == nullptr) {
-        table->insert(key, index);
-    } else {
+    if (!table->insert(key, index)) {
         int attempt = 0;
-        while (attempt <= blockSize) {
+        while (attempt < blockSize && !table->insert(key, index)) {
             index = fe(key, index);
-            if (table[index] == nullptr) {
-                table->insert(key, index);
-                break;
-            }
+            table->insert(key, index);
             attempt++;
         }
     }
@@ -57,10 +52,17 @@ void HashTable<Key>::insert(Key key) {
 
 template<class Key>
 bool HashTable<Key>::search(Key key) {
-    bool output = true;
+    bool output = false;
     unsigned index = fd(key, tableSize);
-    if (table[index] == nullptr)
-        return false;
+    if(table->search(key, index)) output = true;
+    else {
+        int attempt = 0;
+        while (attempt < blockSize && !table->search(key, index)) {
+            index = fe(key, index);
+            if(table->search(key, index)) output = true;
+            attempt++;
+        }
+    }
     return output;
 
 }
